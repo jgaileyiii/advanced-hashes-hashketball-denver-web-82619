@@ -104,7 +104,7 @@ def game_hash
 end
 
 def num_points_scored(sought_player_name)
-  game_hash.each do |_place, team|
+  game_hash.each do |place, team|
     team.each do |attribute, data|
       next unless attribute == :players
 
@@ -116,7 +116,7 @@ def num_points_scored(sought_player_name)
 end
 
 def shoe_size(sought_player_name)
-  game_hash.each do |_place, team|
+  game_hash.each do |place, team|
     team.each do |attribute, data|
       next unless attribute == :players
 
@@ -126,7 +126,6 @@ def shoe_size(sought_player_name)
     end
   end
 end
-
 def team_colors(team_name)
   game_hash.each do |place, team|
     return game_hash[place][:colors] if team[:team_name] == team_name
@@ -134,14 +133,14 @@ def team_colors(team_name)
 end
 
 def team_names
-  game_hash.collect do |_place, team|
+  game_hash.collect do |place, team|
     team[:team_name]
   end
 end
 
 def player_numbers(team_name)
   nums = []
-  game_hash.each do |_place, team|
+  game_hash.each do |place, team|
     next unless team[:team_name] == team_name
 
     team.each do |attribute, data|
@@ -224,7 +223,7 @@ end
 def winning_team
    scores = { 'Brooklyn Nets' => 0, 'Charlotte Hornets' => 0 }
 
-  game_hash.each do |_team, game_data|
+  game_hash.each do |team, game_data|
     game_data[:players].each do |player|
       scores[game_data[:team_name]] += iterate_through_players_for(player[:player_name], :points)
     end
